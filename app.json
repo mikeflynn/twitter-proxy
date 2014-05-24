@@ -1,0 +1,6 @@
+{
+  "name": "Twitter API Proxy",
+  "description": "A basic app that allows for javascript access to the Twitter API.",
+  "repository": "https://github.com/collectiveds/twitter-proxy",
+  "keywords": ["node", "twitter", "api"]
+}
