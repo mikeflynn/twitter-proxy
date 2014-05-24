@@ -47,6 +47,12 @@ app.use(bodyParser());
 
 app.set('port', (process.env.PORT || 5000));
 
+app.get('/crossdomain.xml', function(request, response) {
+  var xml = '<?xml version="1.0" ?><cross-domain-policy><allow-access-from domain="*" /></cross-domain-policy>';
+
+  response.send(xml);
+});
+
 app.post('/*', function(request, response) {
   var path = request.originalUrl;
   var headers = {
