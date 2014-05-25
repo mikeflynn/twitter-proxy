@@ -4,7 +4,8 @@ A simple Node.js application that starts a web server to proxy Javascript reques
 
 ## Instructions:
 
-    cd twitter-proxy && npm install
+    cd twitter-proxy
+    npm install
     node start
 
 Your app should now be running on localhost:5000.
