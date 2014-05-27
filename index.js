@@ -56,22 +56,27 @@ app.get('/crossdomain.xml', function(request, response) {
 app.all('/*', function(request, response) {
   var method = request.method;
   var path = request.originalUrl;
-  var headers = {
-    'content-type': request.headers['content-type'],
-    'content-length': request.headers['content-length'],
-    'Authorization': (request.headers['Authorization'] ? request.headers['Authorization'] : false)
-  };
 
-  var body = (method === 'post' ? request.body : '');
-
-  var callback = function(resp) {
+  if(method === 'options') {
     response.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
     response.setHeader('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
     response.setHeader('Access-Control-Allow-Origin', '*');
-    response.send(resp);
-  };
+    response.writeHead(200);
+  } else {
+    var headers = {
+      'content-type': request.headers['content-type'],
+      'content-length': request.headers['content-length'],
+      'Authorization': (request.headers['Authorization'] ? request.headers['Authorization'] : false)
+    };
 
-  twitter(path, method, body, headers, callback);
+    var body = (method === 'post' ? request.body : '');
+
+    var callback = function(resp) {
+      response.send(resp);
+    };
+
+    twitter(path, method, body, headers, callback);
+  }
 });
 
 app.listen(app.get('port'), function() {
