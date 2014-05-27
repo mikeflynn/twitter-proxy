@@ -65,6 +65,8 @@ app.all('/*', function(request, response) {
   var body = (method === 'post' ? request.body : '');
 
   var callback = function(resp) {
+    response.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
+    response.setHeader('Access-Control-Request-Headers', 'origin, authorization, access-control-allow-origin, accept, access-control-allow-headers');
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.send(resp);
   };
