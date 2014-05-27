@@ -66,7 +66,7 @@ app.all('/*', function(request, response) {
 
   var callback = function(resp) {
     response.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
-    response.setHeader('Access-Control-Request-Headers', 'origin, authorization, access-control-allow-origin, accept, access-control-allow-headers');
+    response.setHeader('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.send(resp);
   };
