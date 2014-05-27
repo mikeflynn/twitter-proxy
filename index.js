@@ -65,6 +65,7 @@ app.all('/*', function(request, response) {
   var body = (method === 'post' ? request.body : '');
 
   var callback = function(resp) {
+    response.setHeader('Access-Control-Allow-Origin', '*');
     response.send(resp);
   };
 
@@ -72,5 +73,5 @@ app.all('/*', function(request, response) {
 });
 
 app.listen(app.get('port'), function() {
-  console.log("Twitter Proxy API is running at localhost:" + app.get('port'));
+  console.log("Twitter Proxy API is running at on port " + app.get('port'));
 });
