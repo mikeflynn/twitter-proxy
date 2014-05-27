@@ -58,10 +58,11 @@ app.all('/*', function(request, response) {
   var path = request.originalUrl;
 
   if(method === 'options') {
-    response.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
-    response.setHeader('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
-    response.setHeader('Access-Control-Allow-Origin', '*');
-    response.writeHead(200);
+    response.writeHead(200, {
+      'Access-Control-Allow-Methods': 'POST,GET,OPTIONS,PUT,DELETE',
+      'Access-Control-Allow-Headers': 'Origin,Content-Type,Accept,Authorization',
+      'Access-Control-Allow-Origin': '*'
+    });
   } else {
     var headers = {
       'content-type': request.headers['content-type'],
@@ -72,6 +73,9 @@ app.all('/*', function(request, response) {
     var body = (method === 'post' ? request.body : '');
 
     var callback = function(resp) {
+      // response.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
+      // response.setHeader('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
+      // response.setHeader('Access-Control-Allow-Origin', '*');
       response.send(resp);
     };
 
