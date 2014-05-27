@@ -54,15 +54,14 @@ app.get('/crossdomain.xml', function(request, response) {
 });
 
 app.all('/*', function(request, response) {
-  var method = request.method;
+  var method = request.method.toLowerCase();
   var path = request.originalUrl;
 
   if(method === 'options') {
-    response.writeHead(200, {
-      'Access-Control-Allow-Methods': 'POST,GET,OPTIONS,PUT,DELETE',
-      'Access-Control-Allow-Headers': 'Origin,Content-Type,Accept,Authorization',
-      'Access-Control-Allow-Origin': '*'
-    });
+    response.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
+    response.setHeader('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.send();
   } else {
     var headers = {
       'content-type': request.headers['content-type'],
@@ -75,7 +74,7 @@ app.all('/*', function(request, response) {
     var callback = function(resp) {
       // response.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
       // response.setHeader('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
-      // response.setHeader('Access-Control-Allow-Origin', '*');
+      response.setHeader('Access-Control-Allow-Origin', '*');
       response.send(resp);
     };
 
