@@ -67,7 +67,7 @@ app.all('/*', function(request, response) {
     var headers = {
       'content-type': request.headers['content-type'],
       'content-length': request.headers['content-length'],
-      'Authorization': (request.headers['Authorization'] ? request.headers['Authorization'] : false)
+      'Authorization': (request.headers['authorization'] ? request.headers['authorization'] : false)
     };
 
     var body = (method === 'post' ? request.body : '');
