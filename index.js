@@ -65,10 +65,12 @@ app.all('/*', function(request, response) {
     response.end();
   } else {
     var headers = {
-      'content-type': request.headers['content-type'],
-      'content-length': request.headers['content-length'],
+      'content-type': (request.headers['content-type'] ? request.headers['content-type'] : false),
+      'content-length': (request.headers['content-length'] ? request.headers['content-length'] : false),
       'Authorization': (request.headers['authorization'] ? request.headers['authorization'] : false)
     };
+
+    for(var k in headers) if(!headers[k]) delete headers[k];
 
     var body = (method === 'post' ? request.body : '');
 
