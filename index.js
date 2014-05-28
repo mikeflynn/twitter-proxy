@@ -34,7 +34,7 @@ var twitter = function(path, method, post, headers, callback) {
     });
   });
 
-  if(method === 'POST') {
+  if(method === 'post') {
     req.write(serialize(post));
   }
 
@@ -62,6 +62,7 @@ app.all('/*', function(request, response) {
     response.setHeader('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.send();
+    response.end();
   } else {
     var headers = {
       'content-type': request.headers['content-type'],
@@ -76,6 +77,7 @@ app.all('/*', function(request, response) {
       // response.setHeader('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization');
       response.setHeader('Access-Control-Allow-Origin', '*');
       response.send(resp);
+      response.end();
     };
 
     twitter(path, method, body, headers, callback);
